@@ -95,10 +95,12 @@ def sanar(fila,col,vidaInicial, vidaActual,d, mapa):
                         
     casillas=sum(casillas, [])#esto simplifica la matrix, por que antes estaba dividida por el numero de movimientos nesesarios para llegar a esa cordenada
     
-    for personage in personages:#este for e if hace que todas las pociciones donde alla un personage sean eliminadas de el registro ya que se puede pasar por esas casillas pero no quedarce
+    for personage in personages:#este for e if hace que todas las pociciones donde alla un personage sean eliminadas de el registro ya que se puede pasar por esas casillas pero no quedarce y verifica si un personage esta en la misma pocicion de obstaculo, si lo esta retorna error
         if [personage[0],personage[1]] in casillas and [personage[0],personage[1]]!=inicio:
             casillas.remove([personage[0],personage[1]])
             mapa[personage[0]][personage[1]]="."
+        if mapa[personage[0]][personage[1]]=="X"or mapa[personage[0]][personage[1]]=="x":#este if verifica si un personage esta en la misma pocicion de obstaculo, si lo esta retorna error
+            return "error, un personage no puede estar en la pocicion de un obstaculo"
     for x in mapa:#muestra el mapa
         print(x)
 #//////////////////////////////////////////////
@@ -114,6 +116,6 @@ def sanar(fila,col,vidaInicial, vidaActual,d, mapa):
                     return 10-(10-personage[4])#aca devuelbe cuanto le curo para curar por completo al personage
 #/////////////////////////////////////////////
 
-resultado=sanar([2,3,0,2,0,3],[2,3,5,0,4,1],[13,40,40,50,40,6],[10,34,1,48,32,1],4,[[".",".","X","X",".","."],[".",".",".","X","X","X"],[".",".",".","X",".","."],[".",".",".",".",".","."]])
+resultado=sanar([0,3,0,2,0,3],[2,3,5,0,4,1],[13,40,40,50,40,6],[10,34,1,48,32,1],4,[[".",".","X","X",".","."],[".",".",".","X","X","X"],[".",".",".","X",".","."],[".",".",".",".",".","."]])
 
 print(resultado)
