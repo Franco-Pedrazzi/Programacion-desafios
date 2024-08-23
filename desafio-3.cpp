@@ -11,7 +11,7 @@ int NroLlamadas=0;
 int NroCaminosIncorrectos=0;
 bool Retroceder=false;
 int NroRetrocesos=0;
-
+bool Inicio=false;
 
 bool Find_Path(int x,int y){
     NroLlamadas++;
@@ -64,6 +64,7 @@ int main(){
      for(int x=0;x<fila;x++){
             for(int y=0;y<columna;y++){
             if(mapa[x][y]=='S'){
+                Inicio=true;
             if(Find_Path(x,y)==false){
                 cout <<"Error, no se encontro el camino"<< endl;
                 return 0 ;
@@ -71,14 +72,19 @@ int main(){
             }
             }
     }
+     if(Inicio==false){
+                cout <<"Error, no se encontro el comienzo"<< endl;
+                return 0 ;
+    }
     cout <<"mapa: "<< endl;
     for(int x=0;x<fila;x++){
+        cout <<"|";
             for(int y=0;y<columna;y++){
             cout << mapa[x][y];
             }
-        cout << endl;
+        cout <<"|"<< endl;
     }
-    
+   
     cout <<"nro de llamadas de la funcion: " <<  NroLlamadas << endl;
     cout <<"nro caminos incorrectos: " <<  NroCaminosIncorrectos << endl;
     cout <<"nro de retrocesos : " <<  NroRetrocesos << endl;
