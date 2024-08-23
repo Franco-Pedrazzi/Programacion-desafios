@@ -1,9 +1,9 @@
 #include <iostream>
-#include <chrono>
+#include <ctime>
 using namespace std;
 
 char mapa [3][3]={{'S','.','.'}
-                 ,{'#','#','#'}
+                 ,{'.','#','#'}
                  ,{'.','.','G'}};
 int fila=end(mapa)-begin(mapa);
 int columna=end(mapa[0])-begin(mapa[0]);
@@ -12,7 +12,6 @@ int NroCaminosIncorrectos=0;
 bool Retroceder=false;
 int NroRetrocesos=0;
 
-auto inicio = std::chrono::high_resolution_clock::now();
 
 bool Find_Path(int x,int y){
     NroLlamadas++;
@@ -59,6 +58,9 @@ return false;
 }
 
 int main(){
+    clock_t tiempo;
+    tiempo=clock();
+
      for(int x=0;x<fila;x++){
             for(int y=0;y<columna;y++){
             if(mapa[x][y]=='S'){
@@ -80,9 +82,8 @@ int main(){
     cout <<"nro de llamadas de la funcion: " <<  NroLlamadas << endl;
     cout <<"nro caminos incorrectos: " <<  NroCaminosIncorrectos << endl;
     cout <<"nro de retrocesos : " <<  NroRetrocesos << endl;
-    auto final = std::chrono::high_resolution_clock::now();
-    auto tiempo = std::chrono::duration_cast<std::chrono::milliseconds>(final - inicio).count();
 
-    cout << tiempo << " milisegundos" << std::endl;
+    tiempo=clock()-tiempo;
+    cout << (double(tiempo)/CLOCKS_PER_SEC)*1000 << " milisegundos" << endl;
     return 0 ;
 }
